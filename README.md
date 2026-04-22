@@ -10,4 +10,5 @@ Milestone 4 Devlog goes here.
 ## Final Devlog
 Final Devlog goes here.
 ## Open-source assets
-- Cite any external assets used here!
+- [Pipe](https://assetstore.unity.com/packages/3d/props/industrial/modular-pipeline-pack-70776)
+- [Fish](https://assetstore.unity.com/packages/3d/characters/animals/fish/low-poly-fish-339618#content)

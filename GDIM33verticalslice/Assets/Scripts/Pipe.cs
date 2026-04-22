@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Pipe : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Transform _playerTransform;
+    [SerializeField] private float interactionDistance;
 
-    // Update is called once per frame
+
     void Update()
     {
-        
+        // Check player position
+        if(Vector3.Distance(transform.position, _playerTransform.position) < interactionDistance)
+        {
+            Debug.Log("Player find the pipe");
+        }
     }
 }
