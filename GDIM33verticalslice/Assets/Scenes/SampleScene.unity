@@ -1009,6 +1009,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerTransform: {fileID: 493834056}
   interactionDistance: 5
+  _fishNode: {fileID: 11400000, guid: 9ebdd2288caec4bbebd8740dae3f76e8, type: 2}
 --- !u!136 &497266039
 CapsuleCollider:
   m_ObjectHideFlags: 0

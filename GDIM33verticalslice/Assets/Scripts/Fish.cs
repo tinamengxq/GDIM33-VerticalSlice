@@ -7,6 +7,7 @@ public class Fish : MonoBehaviour
     [SerializeField] private Transform _playerTransform;
     [SerializeField] private float interactionDistance;
 
+    public FishNode _fishNode;
 
     void Update()
     {
