@@ -1010,6 +1010,9 @@ MonoBehaviour:
   _playerTransform: {fileID: 493834056}
   interactionDistance: 5
   _fishNode: {fileID: 11400000, guid: 9ebdd2288caec4bbebd8740dae3f76e8, type: 2}
+  found: 0
+  die: 0
+  fishHP: 10
 --- !u!136 &497266039
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2142,6 +2145,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerTransform: {fileID: 493834056}
   interactionDistance: 5
+  gameController: {fileID: 0}
+  pipeID: 0
+  found: 0
 --- !u!1001 &1687561052
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2560,6 +2566,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pamphletContent: {fileID: 2015888144}
   _pamphletButton: {fileID: 1094267152}
+  pipeToolUI: []
+  pipeToolText: []
+  pipeNode: []
+  gameController: {fileID: 0}
+  _dialogueUI: {fileID: 0}
+  _dialogue: {fileID: 0}
 --- !u!4 &1959049566
 Transform:
   m_ObjectHideFlags: 0
@@ -2696,7 +2708,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2015888145
 RectTransform:
   m_ObjectHideFlags: 0

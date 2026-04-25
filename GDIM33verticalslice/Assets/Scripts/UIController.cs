@@ -1,16 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
     [SerializeField] private GameObject _pamphletContent;
     [SerializeField] private GameObject _pamphletButton;
+    [SerializeField] private GameObject[] pipeToolUI;
+    [SerializeField] private TMP_Text[] pipeToolText;
+    [SerializeField] private PipeNode[] pipeNode;
+    [SerializeField] private GameController gameController;
+    [SerializeField] private GameObject _dialogueUI;
+    [SerializeField] private TMP_Text _dialogue;
 
     void Start()
     {
         _pamphletButton.SetActive(true);
         _pamphletContent.SetActive(false);
+        gameController.FindPipe += TellTool;
+        gameController.win += WinDia;
     }
 
     public void ShowPamphletContent()
@@ -25,5 +34,34 @@ public class UIController : MonoBehaviour
         _pamphletContent.SetActive(false);
         _pamphletButton.SetActive(true);
         Debug.Log("Close pamphlet");
+    }
+    private bool closable = false;
+    public void TellTool(int id)
+    {
+        pipeToolUI[id].SetActive(true);
+        Debug.Log("Show hint");
+        pipeToolText[id].text = pipeNode[id].description;
+        closable = true;
+    }
+
+    void Update()
+    {
+        if(pipeToolUI[0] && closable)
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+            pipeToolUI[0].SetActive(false);
+            }
+        }  
+    }
+
+    public void WinDia()
+    {
+        _dialogueUI.SetActive(true);
+        _dialogue.text = "Ohh I lose. Take your tool!";
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            _dialogueUI.SetActive(false);
+        }
     }
 }

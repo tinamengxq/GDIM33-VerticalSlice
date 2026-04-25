@@ -19,15 +19,42 @@ public class GameController : MonoBehaviour
     public GameState gameState;
     public GameController gameController {set; private get;}
 
-    public event Action FindPipe;
+    [SerializeField] private Pipe pipe;
+    [SerializeField] private Fish fish;
+
+    public event Action<int> FindPipe;
+    public event Action FindFish;
+    public event Action win;
 
     void Start()
     {
         gameState = GameState.Start;
     }
+
+    void Update()
+    {
+        if(pipe.found == true && gameState == GameState.Start)
+        {
+            FindPipe?.Invoke(pipe.pipeID);
+            gameState = GameState.FindPipe;
+        }
+
+        if(fish.found == true && gameState == GameState.FindPipe)
+        {
+            FindFish?.Invoke();
+            gameState = GameState.FightFish;
+        }
+        
+        if(fish.die == true && gameState == GameState.FightFish)
+        {
+            gameState = GameState.Win;
+            win?.Invoke();
+        }
+    }
+
 }
 
-//start的时候，鱼没有反应，pipe靠近了会有弹窗，quest现实寻找state
+//start的时候，鱼没有反应，pipe靠近了出发event findpipe
 //靠近pipe弹窗之后对话结束变成findpipe，鱼会有反应聊，quest实现寻找fish
 //靠近fish的时候fish会原地转圈，玩家可以通过点击E攻击，当鱼的生命值开始减少的时候进入FightFish
 //鱼暂时不会回击，等鱼等生命值归0，进入win，这个时候玩家可以和鱼对话
