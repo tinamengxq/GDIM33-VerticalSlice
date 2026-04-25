@@ -17,4 +17,8 @@ public class Fish : MonoBehaviour
             Debug.Log("Player find the pipe");
         }
     }
+
+    //栈豆
+
+    public int fishHP = 10;
 }
