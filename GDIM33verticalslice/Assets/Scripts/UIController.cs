@@ -7,8 +7,6 @@ public class UIController : MonoBehaviour
 {
     [SerializeField] private GameObject _pamphletContent;
     [SerializeField] private GameObject _pamphletButton;
-    [SerializeField] private GameObject[] pipeToolUI;
-    [SerializeField] private TMP_Text[] pipeToolText;
     [SerializeField] private PipeNode[] pipeNode;
     [SerializeField] private GameController gameController;
     [SerializeField] private GameObject _dialogueUI;
@@ -20,6 +18,7 @@ public class UIController : MonoBehaviour
         _pamphletContent.SetActive(false);
         gameController.FindPipe += TellTool;
         gameController.win += WinDia;
+        _dialogueUI.SetActive(false);
     }
 
     public void ShowPamphletContent()
@@ -35,24 +34,21 @@ public class UIController : MonoBehaviour
         _pamphletButton.SetActive(true);
         Debug.Log("Close pamphlet");
     }
-    private bool closable = false;
+
     public void TellTool(int id)
     {
-        pipeToolUI[id].SetActive(true);
+        _dialogueUI.SetActive(true);
         Debug.Log("Show hint");
-        pipeToolText[id].text = pipeNode[id].description;
-        closable = true;
+        _dialogue.text = pipeNode[id].description;
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            _dialogueUI.SetActive(false);
+        }
     }
 
     void Update()
     {
-        if(pipeToolUI[0] && closable)
-        {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-            pipeToolUI[0].SetActive(false);
-            }
-        }  
+
     }
 
     public void WinDia()

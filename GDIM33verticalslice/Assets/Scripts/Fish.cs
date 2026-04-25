@@ -17,7 +17,7 @@ public class Fish : MonoBehaviour
         // Check player position
         if(Vector3.Distance(transform.position, _playerTransform.position) < interactionDistance)
         {
-            Debug.Log("Player find the pipe");
+            Debug.Log("Player find the fish");
             found = true;
         }
     }
