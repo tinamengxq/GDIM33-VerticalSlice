@@ -681,6 +681,7 @@ GameObject:
   - component: {fileID: 493834051}
   - component: {fileID: 493834057}
   - component: {fileID: 493834060}
+  - component: {fileID: 493834061}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -858,6 +859,21 @@ MonoBehaviour:
     _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
     _objectReferences:
     - {fileID: 11400000, guid: 74aab27420d2042939cce3815979e781, type: 2}
+--- !u!114 &493834061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493834050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f88843c48796d400f86cb0b76b7989c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerATK: 1
+  gameController: {fileID: 794410742}
+  fish: {fileID: 497266038}
 --- !u!1001 &497266034
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1012,7 +1028,6 @@ MonoBehaviour:
   _fishNode: {fileID: 11400000, guid: 9ebdd2288caec4bbebd8740dae3f76e8, type: 2}
   found: 0
   die: 0
-  fishHP: 10
 --- !u!136 &497266039
 CapsuleCollider:
   m_ObjectHideFlags: 0

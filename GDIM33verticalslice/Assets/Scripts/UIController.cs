@@ -48,7 +48,10 @@ public class UIController : MonoBehaviour
 
     void Update()
     {
-
+        if(_dialogueUI && Input.GetKeyDown(KeyCode.F))
+        {
+            _dialogueUI.SetActive(false);
+        }
     }
 
     public void WinDia()

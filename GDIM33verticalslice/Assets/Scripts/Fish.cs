@@ -8,10 +8,14 @@ public class Fish : MonoBehaviour
     [SerializeField] private Transform _playerTransform;
     [SerializeField] private float interactionDistance;
 
-    public FishNode _fishNode;
+    [SerializeField] private FishNode _fishNode;
     public bool found = false;
     public bool die = false;
 
+    void Start()
+    {
+        life = _fishNode.HP;
+    }
     void Update()
     {
         // Check player position
@@ -20,19 +24,18 @@ public class Fish : MonoBehaviour
             Debug.Log("Player find the fish");
             found = true;
         }
+        if(life <= 0)
+        {
+            die = true;
+            Debug.Log("Fish die");
+        }
     }
 
     //栈豆
 
-    public int fishHP = 10;
     private int life;
     public void kill()
     {
-        life = fishHP;
         life -= 1;
-        if(life <= 0)
-        {
-            die = true;
-        }
     }
 }

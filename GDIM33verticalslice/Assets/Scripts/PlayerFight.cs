@@ -20,6 +20,7 @@ public class PlayerFight : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 fish.kill();
+                Debug.Log("Fish life -=1");
             }
         }
     }
@@ -27,5 +28,6 @@ public class PlayerFight : MonoBehaviour
     private void CanFight()
     {
         fight = true;
+        Debug.Log("can fight");
     }
 }

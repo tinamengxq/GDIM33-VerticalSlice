@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   fishID: 0
-  HP: 0
+  HP: 3
   ATK: 0
   dialogueNode: {fileID: 0}
