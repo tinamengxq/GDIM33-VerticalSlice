@@ -11,6 +11,7 @@ public class Fish : MonoBehaviour
     [SerializeField] private FishNode _fishNode;
     public bool found = false;
     public bool die = false;
+    [SerializeField] private GameObject hurtUI;
 
     void Start()
     {
@@ -24,10 +25,15 @@ public class Fish : MonoBehaviour
             Debug.Log("Player find the fish");
             found = true;
         }
+        else
+        {
+            found = false;
+        }
         if(life <= 0)
         {
             die = true;
             Debug.Log("Fish die");
+            hurtUI.SetActive(false);
         }
     }
 

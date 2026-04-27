@@ -25,6 +25,8 @@ public class GameController : MonoBehaviour
     public event Action<int> FindPipe;
     public event Action FindFish;
     public event Action win;
+    public event Action BackToPipe;
+    public event Action problemSolved;
 
     void Start()
     {
@@ -49,6 +51,23 @@ public class GameController : MonoBehaviour
         {
             gameState = GameState.Win;
             win?.Invoke();
+        }
+
+        if(pipe.found == true && gameState == GameState.Win)
+        {
+            BackToPipe?.Invoke();
+            gameState = GameState.GetTool;
+        }
+
+        if(pipe.correctTool == true && gameState == GameState.GetTool)
+        {
+            gameState = GameState.FinishRepair;
+        }
+
+        if(gameState == GameState.FinishRepair)
+        {
+            problemSolved?.Invoke();
+            Debug.Log("End");
         }
     }
 
