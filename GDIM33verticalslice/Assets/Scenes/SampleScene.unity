@@ -336,7 +336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerTransform: {fileID: 493834056}
-  following: {x: 0, y: 3, z: -2.5}
+  following: {x: 0, y: 0, z: 0}
 --- !u!1 &394272322
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,7 +744,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &493834054
@@ -796,7 +796,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 493834050}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &493834056
 Transform:
   m_ObjectHideFlags: 0
@@ -806,8 +806,8 @@ Transform:
   m_GameObject: {fileID: 493834050}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -4.75, y: 0.523, z: -2.29}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -875,6 +875,7 @@ MonoBehaviour:
   gameController: {fileID: 794410742}
   fish: {fileID: 497266038}
   hurtUI: {fileID: 1052153558}
+  interval: 1
 --- !u!1001 &497266034
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1025,7 +1026,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerTransform: {fileID: 493834056}
-  interactionDistance: 5
+  interactionDistance: 1
   _fishNode: {fileID: 11400000, guid: 9ebdd2288caec4bbebd8740dae3f76e8, type: 2}
   found: 0
   die: 0
@@ -1857,7 +1858,7 @@ GameObject:
   m_Component:
   - component: {fileID: 907790802}
   m_Layer: 0
-  m_Name: Transparent_wall
+  m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2952,7 +2953,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerTransform: {fileID: 493834056}
-  interactionDistance: 2
+  interactionDistance: 1
   gameController: {fileID: 794410742}
   uIController: {fileID: 1959049565}
   pipeID: 0

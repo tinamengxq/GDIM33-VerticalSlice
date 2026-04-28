@@ -15,7 +15,8 @@ public class PlayerFight : MonoBehaviour
         gameController.FindFish += CanFight;  
         hurtUI.SetActive(false);
     }
-    private float interval = 0.1f;
+    [SerializeField] private float interval = 1f;
+    private float newTime;
     void Update()
     {
         if(fight == true)
@@ -25,11 +26,16 @@ public class PlayerFight : MonoBehaviour
                 fish.kill();
                 Debug.Log("Fish life -=1");
                 hurtUI.SetActive(true);
-                float newTime = interval -= Time.deltaTime;
-                if (newTime <= 0f)
-                {
-                    hurtUI.SetActive(false);
-                }
+                newTime = interval;
+            }
+        }
+
+        if (hurtUI)
+        {
+            newTime -= Time.deltaTime;
+            if (newTime <= 0f)
+            {
+                hurtUI.SetActive(false);
             }
         }
     }

@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour
         }
 
         _playerTransform.Rotate(0f, mouseX,0f, Space.Self);
-        _playerTransform.Rotate(-mouseY,0f,0f, Space.World);
+        //_playerTransform.Rotate(-mouseY,0f,0f, Space.World);
 
         transform.localPosition = following;
     }
