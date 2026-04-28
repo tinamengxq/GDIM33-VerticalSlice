@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private Pipe pipe;
     [SerializeField] private Fish fish;
 
+
     public event Action<int> FindPipe;
     public event Action FindFish;
     public event Action win;

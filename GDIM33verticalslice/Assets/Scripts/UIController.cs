@@ -14,6 +14,12 @@ public class UIController : MonoBehaviour
     [SerializeField] private TMP_Text _dialogue;
     [SerializeField] private GameObject _hint;
     [SerializeField] private GameObject _bag;
+    [SerializeField] private GameObject _backgroundinfo;
+
+    public TMP_Text step1;
+    public TMP_Text step2;
+    public TMP_Text step3;
+    public TMP_Text step4;
 
     public event Action<int> CheckTool;
 
@@ -28,6 +34,14 @@ public class UIController : MonoBehaviour
         _hint.SetActive(false);
         _bag.SetActive(false);
         gameController.problemSolved += End;
+        step1.color = Color.black;
+        step2.color = Color.grey;
+        //step2.enabled = false;
+        step3.color = Color.grey;
+        //step3.enabled = false;
+        step4.color = Color.grey;
+        //step4.enabled = false;
+        _backgroundinfo.SetActive(true);
     }
 
     public void ShowPamphletContent()
@@ -49,10 +63,18 @@ public class UIController : MonoBehaviour
         _dialogueUI.SetActive(true);
         Debug.Log("Show hint");
         _dialogue.text = pipeNode[id].description;
+        step2.color = Color.black;
+        step2.enabled = true;
+        step2.text = "2. Tool is in fish in red and white";
     }
+
 
     void Update()
     {
+        if (_backgroundinfo && Input.GetKeyDown(KeyCode.F))
+        {
+            _backgroundinfo.SetActive(false);
+        }
         if (Input.GetKeyDown(KeyCode.P))
         {
             ShowPamphletContent();
@@ -84,12 +106,20 @@ public class UIController : MonoBehaviour
             CheckTool?.Invoke(1);
         }
         
+        if (end == true && _dialogueUI)
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                _dialogueUI.SetActive(false);
+            }
+        }
     }
 
     public void WinDia()
     {
         _dialogueUI.SetActive(true);
         _dialogue.text = "Ohh I lose. Take your tool!";
+        step3.color = Color.black;
     }
 
     public bool interactable = false;
@@ -100,9 +130,12 @@ public class UIController : MonoBehaviour
         //_bag.SetActive(true);
     }
 
+    private bool end = false;
     public void End()
     {
         _dialogue.text = "Correct tool! problem is solved";
+        step4.color = Color.black;
+        end = true;
     }
 
 
