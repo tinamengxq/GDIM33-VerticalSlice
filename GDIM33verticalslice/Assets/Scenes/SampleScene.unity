@@ -1180,7 +1180,7 @@ PrefabInstance:
     - target: {fileID: 1624506335958790680, guid: 35b7195a6107d514e842806a72d31d57,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.703846
+      value: 3.289
       objectReference: {fileID: 0}
     - target: {fileID: 1624506335958790680, guid: 35b7195a6107d514e842806a72d31d57,
         type: 3}
@@ -3908,7 +3908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data:
-    _json: '{"declarations":{"Kind":"Scene","collection":{"$content":[{"name":"interaction_distance","value":{"$content":5.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
+    _json: '{"declarations":{"Kind":"Scene","collection":{"$content":[{"name":"interaction_distance","value":{"$content":2.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
       mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"player_gameObject","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
       UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
     _objectReferences:
