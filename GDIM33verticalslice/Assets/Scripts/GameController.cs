@@ -1,7 +1,7 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
+
 
 public enum GameState
 {
@@ -29,13 +29,24 @@ public class GameController : MonoBehaviour
     public event Action BackToPipe;
     public event Action problemSolved;
 
+
+    public float maxOxygen = 100f;
+    public float oxygenLevel;
+    public float lowOxygen = 10f;
+    public PlayableDirector oxygenTimeline;
+    [SerializeField] private float LoseO2;
+    [SerializeField] private float AddO2;
+
     void Start()
     {
         gameState = GameState.Start;
+        oxygenLevel = maxOxygen;
     }
 
     void Update()
     {
+        DecreaseO2();
+
         if(pipe.found == true && gameState == GameState.Start)
         {
             FindPipe?.Invoke(pipe.pipeID);
@@ -72,6 +83,32 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void OxygenLevel()
+    {
+        if (oxygenLevel <= lowOxygen)
+        {
+            oxygenTimeline.Play();
+        }
+    }
+
+    public void DecreaseO2()
+    {
+        if (oxygenLevel <= 0f)
+        {
+            return;
+        }
+        oxygenLevel -= LoseO2;
+    }
+
+    public void IncreaseO2()
+    {
+        if (oxygenLevel == maxOxygen)
+        {
+            return;
+        }
+        oxygenLevel += AddO2;
+        
+    }
 }
 
 //start的时候，鱼没有反应，pipe靠近了出发event findpipe
@@ -80,6 +117,7 @@ public class GameController : MonoBehaviour
 //鱼暂时不会回击，等鱼等生命值归0，进入win，这个时候玩家可以和鱼对话
 //对话完之后变成GetTool，quest就变成找到tool然后可以去pipe那边修
 //pipe靠近会有弹窗，提交tool之后就变成finishrepair。游戏结束
+
 
 
 
