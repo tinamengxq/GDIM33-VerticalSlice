@@ -15,6 +15,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject _hint;
     [SerializeField] private GameObject _bag;
     [SerializeField] private GameObject _backgroundinfo;
+    [SerializeField] private TMP_Text _oxygen;
 
     public TMP_Text step1;
     public TMP_Text step2;
@@ -42,6 +43,7 @@ public class UIController : MonoBehaviour
         step4.color = Color.grey;
         //step4.enabled = false;
         _backgroundinfo.SetActive(true);
+        _oxygen.enabled = true;
     }
 
     public void ShowPamphletContent()
@@ -113,6 +115,8 @@ public class UIController : MonoBehaviour
                 _dialogueUI.SetActive(false);
             }
         }
+
+        _oxygen.text = $"Oxygen: {GameController.Instance.oxygenLevel}";
     }
 
     public void WinDia()

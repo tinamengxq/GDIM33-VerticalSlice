@@ -17,7 +17,7 @@ public enum GameState
 public class GameController : MonoBehaviour
 {
     public GameState gameState;
-    public GameController gameController {set; private get;}
+    public static GameController Instance {get; private set;}
 
     [SerializeField] private Pipe pipe;
     [SerializeField] private Fish fish;
@@ -40,12 +40,14 @@ public class GameController : MonoBehaviour
     void Start()
     {
         gameState = GameState.Start;
-        oxygenLevel = maxOxygen;
+        oxygenLevel = 15;
     }
 
     void Update()
     {
         DecreaseO2();
+        OxygenLevel();
+        Debug.Log($"O2:{oxygenLevel}");
 
         if(pipe.found == true && gameState == GameState.Start)
         {
@@ -95,7 +97,7 @@ public class GameController : MonoBehaviour
     {
         if (oxygenLevel <= 0f)
         {
-            return;
+            oxygenLevel = 0f;
         }
         oxygenLevel -= LoseO2;
     }
@@ -104,10 +106,9 @@ public class GameController : MonoBehaviour
     {
         if (oxygenLevel == maxOxygen)
         {
-            return;
+            oxygenLevel = 100f;
         }
         oxygenLevel += AddO2;
-        
     }
 }
 
