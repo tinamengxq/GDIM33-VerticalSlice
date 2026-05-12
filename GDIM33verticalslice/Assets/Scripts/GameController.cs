@@ -40,7 +40,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         gameState = GameState.Start;
-        oxygenLevel = 15;
+        oxygenLevel = maxOxygen;
     }
 
     void Update()

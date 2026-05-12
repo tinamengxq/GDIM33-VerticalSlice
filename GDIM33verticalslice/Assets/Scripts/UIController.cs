@@ -44,6 +44,7 @@ public class UIController : MonoBehaviour
         //step4.enabled = false;
         _backgroundinfo.SetActive(true);
         _oxygen.enabled = true;
+        _oxygen.text = $"O2 level: {GameController.Instance.oxygenLevel:F2}%";
     }
 
     public void ShowPamphletContent()
@@ -116,7 +117,7 @@ public class UIController : MonoBehaviour
             }
         }
 
-        _oxygen.text = $"Oxygen: {GameController.Instance.oxygenLevel}";
+        _oxygen.text = $"O2 level: {GameController.Instance.oxygenLevel:F2}%";
     }
 
     public void WinDia()
