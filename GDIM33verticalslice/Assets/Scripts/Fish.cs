@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Fish : MonoBehaviour
 {
     [SerializeField] private Transform _playerTransform;
     [SerializeField] private float interactionDistance;
-
+    [SerializeField] private NavMeshAgent _navMesh;
     [SerializeField] private FishNode _fishNode;
     public bool found = false;
     public bool die = false;

@@ -39,7 +39,6 @@ public class NPCFish : MonoBehaviour
         if (Vector3.Distance(pos, transform.position) <= 5f)
         {
             newDest = true;
-            
         }
     }
     

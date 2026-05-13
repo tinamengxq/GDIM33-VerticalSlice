@@ -37,6 +37,11 @@ public class GameController : MonoBehaviour
     [SerializeField] private float LoseO2;
     [SerializeField] private float AddO2;
 
+    void Awake()
+    {
+        Instance = this;
+    }
+
     void Start()
     {
         gameState = GameState.Start;

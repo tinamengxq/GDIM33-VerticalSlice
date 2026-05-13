@@ -43,8 +43,7 @@ public class UIController : MonoBehaviour
         step4.color = Color.grey;
         //step4.enabled = false;
         _backgroundinfo.SetActive(true);
-        _oxygen.enabled = true;
-        _oxygen.text = $"O2 level: {GameController.Instance.oxygenLevel:F2}%";
+        _oxygen.text = "O2 Level: " + GameController.Instance.oxygenLevel.ToString("F0") + "%";
     }
 
     public void ShowPamphletContent()
@@ -74,6 +73,7 @@ public class UIController : MonoBehaviour
 
     void Update()
     {
+        _oxygen.text = "O2 Level: " + GameController.Instance.oxygenLevel.ToString("F0") + "%";
         if (_backgroundinfo && Input.GetKeyDown(KeyCode.F))
         {
             _backgroundinfo.SetActive(false);
@@ -117,7 +117,7 @@ public class UIController : MonoBehaviour
             }
         }
 
-        _oxygen.text = $"O2 level: {GameController.Instance.oxygenLevel:F2}%";
+        
     }
 
     public void WinDia()
