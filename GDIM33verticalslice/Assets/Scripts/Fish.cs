@@ -13,6 +13,9 @@ public class Fish : MonoBehaviour
     public bool found = false;
     public bool die = false;
     [SerializeField] private GameObject hurtUI;
+    //[SerializeField] private float speed;
+    private Vector3 pos = new Vector3();
+    private bool newDest = true;
 
     void Start()
     {
@@ -25,6 +28,7 @@ public class Fish : MonoBehaviour
         {
             Debug.Log("Player find the fish");
             found = true;
+            _navMesh.velocity = Vector3.zero;
         }
         else
         {
@@ -35,6 +39,33 @@ public class Fish : MonoBehaviour
             die = true;
             Debug.Log("Fish die");
             hurtUI.SetActive(false);
+        }
+
+        if (newDest == true)
+        {
+            NewPos();
+            _navMesh.SetDestination(pos);
+            newDest = false;
+        }
+        CheckDest();
+
+    }
+    private void NewPos()
+    {
+        float x = Random.Range(-4.77f,3.07f);
+        float y = Random.Range(1.25f,5.14f);
+        float z = Random.Range(-1.9f,4.72f);
+        pos = new Vector3(x, y, z);
+        Debug.Log(pos + "pos");
+        Debug.Log(transform.position);
+    }
+
+    private void CheckDest()
+    {
+        Debug.Log(Vector3.Distance(pos, transform.position));
+        if (Vector3.Distance(pos, transform.position) <= 5f)
+        {
+            newDest = true;
         }
     }
 

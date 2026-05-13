@@ -100,20 +100,20 @@ public class GameController : MonoBehaviour
 
     public void DecreaseO2()
     {
+        oxygenLevel -= LoseO2;
         if (oxygenLevel <= 0f)
         {
             oxygenLevel = 0f;
         }
-        oxygenLevel -= LoseO2;
     }
 
     public void IncreaseO2()
     {
-        if (oxygenLevel == maxOxygen)
+        oxygenLevel += AddO2;
+        if (oxygenLevel >= maxOxygen)
         {
             oxygenLevel = 100f;
         }
-        oxygenLevel += AddO2;
     }
 }
 
