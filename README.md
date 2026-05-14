@@ -11,7 +11,6 @@ And for those that I did for milestone 1, I added game state graph for NPC fishe
 
 ## Milestone 2 Devlog
 1. Timeline Feature
-* In my pitch I included 2 features for timeline: changing color of the screen and changing direction of the camera. I now realized that I let the player to control the camera, which will make the user experience become less enjoyable if I lock the camera control for a long time. Therefore, I will only include changing color of the screen as the feature realized using timaline.
 - Break down summary
     1. learn how to create and use timeline
     2. create oxygen level in gamecontroller and link it to timeline
@@ -31,7 +30,7 @@ And for those that I did for milestone 1, I added game state graph for NPC fishe
 
 4. Briefly explain (in 1-2 sentences) what Unity system you want us to grade for Feature (3). It doesn't matter if it's what you originally pitched- pick your best one and tell us where to find it so we can give you credit.
 
-
+In my pitch I included 2 features for timeline: changing color of the screen and changing direction of the camera. I now realized that I let the player to control the camera, which will make the user experience become less enjoyable if I lock the camera control for a long time. Therefore, I will only include changing color of the screen as the feature realized using timaline.
 ## Milestone 3 Devlog
 Milestone 3 Devlog goes here.
 ## Milestone 4 Devlog

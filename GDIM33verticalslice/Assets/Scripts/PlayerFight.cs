@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class PlayerFight : MonoBehaviour
     private bool fight = false;
     public Fish fish;
     [SerializeField] private GameObject hurtUI;
+    [SerializeField] private float attackDistance;
 
     void Start()
     {
@@ -23,10 +25,7 @@ public class PlayerFight : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                fish.kill();
-                Debug.Log("Fish life -=1");
-                hurtUI.SetActive(true);
-                newTime = interval;
+                RayCasting();
             }
         }
 
@@ -44,5 +43,29 @@ public class PlayerFight : MonoBehaviour
     {
         fight = true;
         Debug.Log("can fight");
+    }
+
+    private void RayCasting()
+    {
+        RaycastHit raycastHit;
+        Vector3 rayDirection = transform.forward;
+        Vector3 rayOrigin = transform.position;
+
+        if (Physics.Raycast(rayOrigin, rayDirection, out raycastHit, attackDistance))
+        {
+            Fish fish = raycastHit.collider.GetComponent<Fish>();
+            if (fish.die != true && fish != null)
+            {
+                fish.kill();
+                Debug.Log("Fish life -=1");
+                hurtUI.SetActive(true);
+                newTime = interval;
+            }
+            else
+            {
+                Debug.Log("wrong direction");
+            }
+        }
+        
     }
 }

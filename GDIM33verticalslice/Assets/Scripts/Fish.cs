@@ -29,11 +29,22 @@ public class Fish : MonoBehaviour
             Debug.Log("Player find the fish");
             found = true;
             _navMesh.velocity = Vector3.zero;
+            _navMesh.isStopped = true;
         }
         else
         {
             found = false;
+            _navMesh.isStopped = false;
+            if (newDest == true)
+            {
+                NewPos();
+                _navMesh.SetDestination(pos);
+                newDest = false;
+            }
+            
+            CheckDest();
         }
+
         if(life <= 0)
         {
             die = true;
@@ -41,13 +52,7 @@ public class Fish : MonoBehaviour
             hurtUI.SetActive(false);
         }
 
-        if (newDest == true)
-        {
-            NewPos();
-            _navMesh.SetDestination(pos);
-            newDest = false;
-        }
-        CheckDest();
+        
 
     }
     private void NewPos()
