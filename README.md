@@ -11,6 +11,7 @@ And for those that I did for milestone 1, I added game state graph for NPC fishe
 
 ## Milestone 2 Devlog
 1. Timeline Feature
+* In my pitch I included 2 features for timeline: changing color of the screen and changing direction of the camera. I now realized that I let the player to control the camera, which will make the user experience become less enjoyable if I lock the camera control for a long time. Therefore, I will only include changing color of the screen as the feature realized using timaline.
 - Break down summary
     1. learn how to create and use timeline
     2. create oxygen level in gamecontroller and link it to timeline
@@ -18,24 +19,17 @@ And for those that I did for milestone 1, I added game state graph for NPC fishe
 - Break down details
     1. go to youtube and unity manual to learn timeline
     2. to go gamecontroller.cs to create oxygen level
-    3. create a timeline
-    4. add UI to be possible changes on the screen
-    5. link the UI to the timeline
-    6. use timeline to control the changes in alpha of the UI panel
-    7. link the camera to the timeline
-    8. record the camera movement change in timeline
-    9. 
+    3. code the logic for the oxygen level to decrease every frame and increase when getting to water surface
+    4. create a timeline
+    5. add UI to be possible changes on the screen
+    6. link the UI to the timeline
+    7. use timeline to control the changes in alpha of the UI panel
+    8. record the alpha changes every second gradually, and set it to repeat during the time when oxygen level < 10%>
+2. Did the task steps break-down activity & quiz question (from W5) help you build a feature for this Milestone? Why or why not, and what would you do to improve your break-downs to be more helpful if you were to do them again?
 
+3. Explain how you bridged visual scripting and code in your game. Are you calling a custom event from a Graph from a C# method, or vice versa, and what purpose does this serve in your architecture? Make sure to name the C# script(s) involved, and attach a screenshot of the relevant Graph.
 
-
-ANSWER THIS BEFORE CODING: Follow the same steps from the W5 Activity to write a quick summary of your complicating gameplay feature (that you are building for this Milestone) and a task break-down of the steps you need to take to build this feature.
-
-Number 2-3 big steps.
-Under each big step, write 2-6 more detailed steps towards completing that task. 
-(This is NOT the architecture break-down with bubbles- it's the task steps from the W5 activity/slides.)
-Do NOT write about the same feature that you wrote about in class. If you feel like you wrote about your complicating feature in class, pick another feature- I'm sure you have more to build even after the W5 class :P.
-
-
+4. Briefly explain (in 1-2 sentences) what Unity system you want us to grade for Feature (3). It doesn't matter if it's what you originally pitched- pick your best one and tell us where to find it so we can give you credit.
 
 
 ## Milestone 3 Devlog

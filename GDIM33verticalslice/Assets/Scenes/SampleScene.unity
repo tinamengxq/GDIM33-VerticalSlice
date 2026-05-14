@@ -2673,6 +2673,7 @@ GameObject:
   - component: {fileID: 794410740}
   - component: {fileID: 794410739}
   - component: {fileID: 794410742}
+  - component: {fileID: 794410743}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -2746,7 +2747,23 @@ MonoBehaviour:
   lowOxygen: 10
   oxygenTimeline: {fileID: 1104368409}
   LoseO2: 0.001
-  AddO2: 10
+  AddO2: 1
+--- !u!114 &794410743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794410738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2fe5546f775c47d2820aa5e8a715f53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
+    _objectReferences:
+    - {fileID: 11400000, guid: 3560677749f934724a1a0d00a8ec4c54, type: 2}
 --- !u!1 &823884688
 GameObject:
   m_ObjectHideFlags: 0
@@ -3507,8 +3524,6 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: -8527136381881069046, guid: 9ddf9837365f044609ca8fa3e8cdb789, type: 2}
     value: {fileID: 907460636}
-  - key: {fileID: 382305519651618599, guid: 9ddf9837365f044609ca8fa3e8cdb789, type: 2}
-    value: {fileID: 823884690}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1104368410

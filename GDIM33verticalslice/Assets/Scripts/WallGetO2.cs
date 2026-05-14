@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.VisualScripting;
 
 public class WallGetO2 : MonoBehaviour
 {
@@ -8,7 +9,8 @@ public class WallGetO2 : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameController.Instance.IncreaseO2();
+            //GameController.Instance.IncreaseO2();
+            EventBus.Trigger(EventNames.IncreaseOxygen, GameController.Instance);
         }
     }
 }
