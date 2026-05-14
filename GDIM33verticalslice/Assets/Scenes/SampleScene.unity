@@ -1145,6 +1145,7 @@ MonoBehaviour:
   gameController: {fileID: 794410742}
   fish: {fileID: 497266038}
   hurtUI: {fileID: 1052153558}
+  attackDistance: 1
   interval: 1
 --- !u!54 &493834062
 Rigidbody:
