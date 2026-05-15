@@ -128,6 +128,10 @@ public class GameController : MonoBehaviour
         {
             oxygenTimeline.Play();
         }
+        if (oxygenLevel >= lowOxygen)
+        {
+            oxygenTimeline.Stop();
+        }
     }
 
     public void DecreaseO2()

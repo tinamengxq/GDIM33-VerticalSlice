@@ -176,6 +176,7 @@ public class UIController : MonoBehaviour
     public void Die()
     {
         _dieUI.SetActive(true);
+        Time.timeScale = 0f;
     }
 
 }

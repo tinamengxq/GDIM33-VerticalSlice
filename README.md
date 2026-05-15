@@ -24,13 +24,63 @@ And for those that I did for milestone 1, I added game state graph for NPC fishe
     6. link the UI to the timeline
     7. use timeline to control the changes in alpha of the UI panel
     8. record the alpha changes every second gradually, and set it to repeat during the time when oxygen level < 10%>
-2. Did the task steps break-down activity & quiz question (from W5) help you build a feature for this Milestone? Why or why not, and what would you do to improve your break-downs to be more helpful if you were to do them again?
+    9. write code to call timeline operation when the event (oxygen < 10%) is triggered'
 
-3. Explain how you bridged visual scripting and code in your game. Are you calling a custom event from a Graph from a C# method, or vice versa, and what purpose does this serve in your architecture? Make sure to name the C# script(s) involved, and attach a screenshot of the relevant Graph.
+2. Yes, the break-down activity really helps! Because I have no idea what is timeline, I may not be able to find any direction when starting to use timeline function in unity. When I am headless, I may think of many things at the same time. Listing all the details help me simplify what I am thinking right now about timeline, and also help me calm down to make a complicated task more elegant. I think I can improve my process to write the break downs. As I know nothing about a new system, I can first write a small break down to show how I want to finish the work. And then, I go and watch video instructions and read unity websites to know the actual steps to use the system. After learning a bit about the system, I shall improve my break down to be more detailed and more correct.
 
-4. Briefly explain (in 1-2 sentences) what Unity system you want us to grade for Feature (3). It doesn't matter if it's what you originally pitched- pick your best one and tell us where to find it so we can give you credit.
+3. I defined a new custom event in C#, and call it in visual scripting graph. My custom event is OnIncreaseO2. This is triggered when player collide with an is triggered invisible object at the top of the room. I follow the instruction in W4 prelearning and the example script in W4 prelearning unity scene to define the event: 
+```
+public static class EventNames
+{
+    public static string IncreaseOxygen = "IncreaseOxygen";
+}
 
-In my pitch I included 2 features for timeline: changing color of the screen and changing direction of the camera. I now realized that I let the player to control the camera, which will make the user experience become less enjoyable if I lock the camera control for a long time. Therefore, I will only include changing color of the screen as the feature realized using timaline.
+[UnitTitle("On Increase O2")]
+[UnitCategory("Events\\MyEvents")]
+public class GraphLinkO2 : EventUnit<GameController>
+{
+    protected override bool register => true;
+
+    public ValueOutput result {get; private set;}
+    public override EventHook GetHook(GraphReference graphReference)
+    {
+        return new EventHook(EventNames.IncreaseOxygen);
+    }
+
+    protected override void Definition()
+    {
+        base.Definition();
+        result = ValueOutput<GameController>("gameController");
+    }
+
+    protected override void AssignArguments(Flow flow, GameController data)
+    {
+        base.AssignArguments(flow, data);
+        flow.SetValue(result , data);
+    }
+}
+```
+The above is my code. This custom event will link to a method written in GameController.cs. Later, I want to define how my event will be triggered. I go to the script written for that invisible is triggered game object and added the following line.
+```
+public class WallGetO2 : MonoBehaviour
+{
+    void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            EventBus.Trigger(EventNames.IncreaseOxygen, GameController.Instance);
+        }
+    }
+}
+```
+This defines when will the custom event be triggered. After coding all of this, I create a node in the game controller script machine graph, and link it to the IncreaseO2() method as shown in the picture below.
+
+4. I integrated both timeline and NavMesh, but I think timeline is better?
+- Timeline
+    - I create a timeline to change the color of the screen when the oxygen is below 10%. 
+    - If you want to see the timeline effect, you can wait will oxygen is 10%, and you will se the screen get darker, and then a bit brighter, and then darker, a bit brighter, and so on. But you should be aware that if your oxygen is decreased to 0%, you will lose the game. 
+    - When you go up to gain oxygen, you will find that the timeline effect disappear once your oxygen is greater than 10%.
+
 ## Milestone 3 Devlog
 Milestone 3 Devlog goes here.
 ## Milestone 4 Devlog
