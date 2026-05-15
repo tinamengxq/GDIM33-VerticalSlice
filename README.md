@@ -74,6 +74,7 @@ public class WallGetO2 : MonoBehaviour
 }
 ```
 This defines when will the custom event be triggered. After coding all of this, I create a node in the game controller script machine graph, and link it to the IncreaseO2() method as shown in the picture below.
+
 <img width="471" height="147" alt="graph" src="https://github.com/user-attachments/assets/63f55116-387a-4a21-965d-f8150d6cb5bc" />
 
 
