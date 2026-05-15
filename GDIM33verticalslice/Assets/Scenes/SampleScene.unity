@@ -2678,7 +2678,7 @@ MonoBehaviour:
   oxygenTimeline: {fileID: 1104368409}
   LoseO2: 0.001
   AddO2: 1
-  initialO2: 9
+  initialO2: 90
   _endUI: {fileID: 1072884332}
   oneOK: 0
 --- !u!114 &794410743
@@ -2998,8 +2998,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 36.498474, y: 34.2173}
-  m_SizeDelta: {x: 1825.408, y: 1124.6659}
+  m_AnchoredPosition: {x: -17.016113, y: -61.805176}
+  m_SizeDelta: {x: 4740.6143, y: 2685.5933}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &907460634
 MonoBehaviour:

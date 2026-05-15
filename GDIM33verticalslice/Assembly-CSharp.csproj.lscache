@@ -64,7 +64,9 @@ Assets/Scripts/
  PlayerFight.cs
  UIController.cs
  WallGetO2.cs
-Assets/TutorialInfo/Scripts/Readme.cs
+Assets/
+ TutorialInfo/Scripts/Readme.cs
+ Unity.VisualScripting.Generated/VisualScripting.Core/AotStubs.cs
 Temp/obj/Debug/Assembly-CSharp/.NETStandard,Version=v2.1.AssemblyAttributes.cs
 
 [metadataReferences]
