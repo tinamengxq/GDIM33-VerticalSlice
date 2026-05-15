@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Pipe : MonoBehaviour
@@ -10,7 +8,8 @@ public class Pipe : MonoBehaviour
     [SerializeField] private UIController uIController;
     public int pipeID;
     public bool found = false;
-    public bool correctTool;
+    public bool correctTool1;
+    public bool correctTool2;
 
     void Start()
     {
@@ -30,15 +29,17 @@ public class Pipe : MonoBehaviour
         }
     }
 
-    public void Check(int i)
+    public void Check(int id)
     {
-        if (i == pipeID)
+        if (id == 0)
         {
-            correctTool = true;
+            correctTool1 = true;
         }
-        else
+        if (id == 1)
         {
-            Debug.Log("Incorrect tool!");
+            correctTool2 = true;
         }
+        Debug.Log($"correctTool1 = {correctTool1}");
+        Debug.Log($"correctTool1 = {correctTool1}");
     }
 }

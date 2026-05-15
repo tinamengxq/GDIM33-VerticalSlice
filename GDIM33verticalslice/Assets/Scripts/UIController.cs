@@ -1,6 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Data.Common;
 using TMPro;
 using UnityEngine;
 
@@ -13,9 +12,10 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject _dialogueUI;
     [SerializeField] private TMP_Text _dialogue;
     [SerializeField] private GameObject _hint;
-    [SerializeField] private GameObject _bag;
     [SerializeField] private GameObject _backgroundinfo;
     [SerializeField] private TMP_Text _oxygen;
+    [SerializeField] private GameObject _dieUI;
+    [SerializeField] private GameObject _endUI;
 
     public TMP_Text step1;
     public TMP_Text step2;
@@ -23,7 +23,6 @@ public class UIController : MonoBehaviour
     public TMP_Text step4;
 
     public event Action<int> CheckTool;
-
     void Start()
     {
         _pamphletButton.SetActive(true);
@@ -33,8 +32,7 @@ public class UIController : MonoBehaviour
         _dialogueUI.SetActive(false);
         gameController.BackToPipe += ShowHint;
         _hint.SetActive(false);
-        _bag.SetActive(false);
-        gameController.problemSolved += End;
+        gameController.problemSolved += Solved;
         step1.color = Color.black;
         step2.color = Color.grey;
         //step2.enabled = false;
@@ -44,6 +42,9 @@ public class UIController : MonoBehaviour
         //step4.enabled = false;
         _backgroundinfo.SetActive(true);
         _oxygen.text = "O2 Level: " + GameController.Instance.oxygenLevel.ToString("F0") + "%";
+        _dieUI.SetActive(false);
+        gameController.die += Die;
+        _endUI.SetActive(false);
     }
 
     public void ShowPamphletContent()
@@ -64,16 +65,28 @@ public class UIController : MonoBehaviour
     {
         _dialogueUI.SetActive(true);
         Debug.Log("Show hint");
-        _dialogue.text = pipeNode[id].description;
         step2.color = Color.black;
         step2.enabled = true;
-        step2.text = "2. Tool is in fish in red and white";
+        if (id == 0)
+        {
+            step2.text = "2. Tool is in fish in red and white";
+            _dialogue.text = pipeNode[0].description;
+        }
+        else if(id == 1)
+        {
+            step2.text = "2. Tool is in fish in green and white";
+            _dialogue.text = pipeNode[1].description;
+        }
+        
     }
 
+    private bool handing = true;
+    private bool handed = false;
 
     void Update()
     {
         _oxygen.text = "O2 Level: " + GameController.Instance.oxygenLevel.ToString("F0") + "%";
+
         if (_backgroundinfo && Input.GetKeyDown(KeyCode.F))
         {
             _backgroundinfo.SetActive(false);
@@ -92,21 +105,32 @@ public class UIController : MonoBehaviour
             _dialogueUI.SetActive(false);
         }
 
-        if(interactable == true && Input.GetKeyDown(KeyCode.F))
+        if(interactable == true && Input.GetKeyDown(KeyCode.F) && _hint.activeSelf)
         {
+            Debug.Log("interactable == true && Input.GetKeyDown(KeyCode.F) && step == 0");
             _dialogueUI.SetActive(true);
             _hint.SetActive(false);
-            _dialogue.text = "Click 1 to hand in tool 1. \nClick 2 to hand in tool 2.\nHint: For milestone1 we only have tool 1.";
+            _dialogue.text = "Click G to hand in the tool.";
+            handing = true;
+            return;
         }
 
-        if(_dialogueUI && Input.GetKeyDown(KeyCode.Alpha1))
+        if(_dialogueUI.activeSelf && Input.GetKeyDown(KeyCode.G) && handing == true && _dialogue.text == "Click G to hand in the tool.")
         {
-            Debug.Log("1");
-            CheckTool?.Invoke(0);
-        }
-        else if(_dialogueUI && Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            CheckTool?.Invoke(1);
+            int id = -1;
+            if (step2.text == "2. Tool is in fish in green and white")
+            {
+                id = 1;
+            }
+            else if(step2.text == "2. Tool is in fish in red and white")
+            {
+                id = 0;
+            }
+            CheckTool?.Invoke(id);
+            Debug.Log("Check");
+            handing = false;
+            handed = true;
+            return;
         }
         
         if (end == true && _dialogueUI)
@@ -117,9 +141,15 @@ public class UIController : MonoBehaviour
             }
         }
 
-        
+        if (_dialogueUI.activeSelf && handed == true & Input.GetKeyDown(KeyCode.F) && gameController.oneOK == false)
+        {
+            _dialogueUI.SetActive(false);
+            _endUI.SetActive(true);
+            handed = false;
+        }
     }
 
+    
     public void WinDia()
     {
         _dialogueUI.SetActive(true);
@@ -132,16 +162,20 @@ public class UIController : MonoBehaviour
     {
         _hint.SetActive(true);
         interactable = true;
-        //_bag.SetActive(true);
     }
 
     private bool end = false;
-    public void End()
+
+    public void Solved()
     {
-        _dialogue.text = "Correct tool! problem is solved";
+        _dialogue.text = "Correct tool! The problem of this pipe is solved";
         step4.color = Color.black;
         end = true;
     }
 
+    public void Die()
+    {
+        _dieUI.SetActive(true);
+    }
 
 }

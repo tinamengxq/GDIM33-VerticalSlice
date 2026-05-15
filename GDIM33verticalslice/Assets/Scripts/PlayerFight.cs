@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerFight : MonoBehaviour
@@ -8,14 +5,14 @@ public class PlayerFight : MonoBehaviour
     public int playerATK = 1;
     public GameController gameController;
     private bool fight = false;
-    public Fish fish;
-    [SerializeField] private GameObject hurtUI;
+    //[SerializeField] private GameObject hurtUI;
     [SerializeField] private float attackDistance;
+    [SerializeField] private float decreaseO2;
 
     void Start()
     {
         gameController.FindFish += CanFight;  
-        hurtUI.SetActive(false);
+        //hurtUI.SetActive(false);
     }
     [SerializeField] private float interval = 1f;
     private float newTime;
@@ -26,17 +23,18 @@ public class PlayerFight : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 RayCasting();
+                Debug.Log("Fight");
             }
         }
 
-        if (hurtUI)
-        {
-            newTime -= Time.deltaTime;
-            if (newTime <= 0f)
-            {
-                hurtUI.SetActive(false);
-            }
-        }
+        //if (hurtUI)
+        //{
+          //  newTime -= Time.deltaTime;
+            //if (newTime <= 0f)
+            //{
+             //   hurtUI.SetActive(false);
+            //}
+        //}
     }
 
     private void CanFight()
@@ -58,7 +56,8 @@ public class PlayerFight : MonoBehaviour
             {
                 fish.kill();
                 Debug.Log("Fish life -=1");
-                hurtUI.SetActive(true);
+                gameController.KillNeedO2(decreaseO2);
+                //hurtUI.SetActive(true);
                 newTime = interval;
             }
             else

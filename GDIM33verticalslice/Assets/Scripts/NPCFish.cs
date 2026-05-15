@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -29,13 +27,10 @@ public class NPCFish : MonoBehaviour
         float y = Random.Range(1.25f,5.14f);
         float z = Random.Range(-1.9f,4.72f);
         pos = new Vector3(x, y, z);
-        Debug.Log(pos + "pos");
-        Debug.Log(transform.position);
     }
 
     private void CheckDest()
     {
-        Debug.Log(Vector3.Distance(pos, transform.position));
         if (Vector3.Distance(pos, transform.position) <= 5f)
         {
             newDest = true;

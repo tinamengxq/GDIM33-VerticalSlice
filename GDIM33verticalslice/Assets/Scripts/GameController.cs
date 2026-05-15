@@ -10,17 +10,17 @@ public enum GameState
     FightFish,
     Win,
     GetTool,
-    FinishRepair
+    FinishRepair,
 
 }
 
 public class GameController : MonoBehaviour
 {
-    public GameState gameState;
+    public GameState[] gameState;
     public static GameController Instance {get; private set;}
 
-    [SerializeField] private Pipe pipe;
-    [SerializeField] private Fish fish;
+    [SerializeField] private Pipe[] pipe;
+    [SerializeField] private Fish[] fish;
 
 
     public event Action<int> FindPipe;
@@ -28,6 +28,8 @@ public class GameController : MonoBehaviour
     public event Action win;
     public event Action BackToPipe;
     public event Action problemSolved;
+    public event Action die;
+    //public event Action gameOver;
 
 
     public float maxOxygen = 100f;
@@ -36,6 +38,8 @@ public class GameController : MonoBehaviour
     public PlayableDirector oxygenTimeline;
     [SerializeField] private float LoseO2;
     [SerializeField] private float AddO2;
+    [SerializeField] private int initialO2;
+    [SerializeField] private GameObject _endUI;
 
     void Awake()
     {
@@ -44,49 +48,77 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        gameState = GameState.Start;
-        oxygenLevel = 80;
+        gameState[0] = GameState.Start;
+        gameState[1] = GameState.Start;
+        oxygenLevel = initialO2;
     }
+
+    public bool oneOK = false;
 
     void Update()
     {
         DecreaseO2();
         OxygenLevel();
-        Debug.Log($"O2:{oxygenLevel}");
 
-        if(pipe.found == true && gameState == GameState.Start)
+        for (int i = 0; i < pipe.Length; i++)
         {
-            FindPipe?.Invoke(pipe.pipeID);
-            gameState = GameState.FindPipe;
+            if(pipe[i].found == true && gameState[i] == GameState.Start)
+            {
+                FindPipe?.Invoke(pipe[i].pipeID);
+                gameState[i] = GameState.FindPipe;
+            }
+
+            if(fish[i].found == true && gameState[i] == GameState.FindPipe)
+            {
+                FindFish?.Invoke();
+                gameState[i] = GameState.FightFish;
+            }
+
+            if(fish[i].die == true && gameState[i] == GameState.FightFish)
+            {
+                gameState[i] = GameState.Win;
+                win?.Invoke();
+            }
+
+            if(pipe[i].found == true && gameState[i] == GameState.Win)
+            {
+                BackToPipe?.Invoke();
+                Debug.Log("back to pipe");
+                gameState[i] = GameState.GetTool;
+            }
+            
+            if(i == 0 && gameState[i] == GameState.GetTool)
+            {
+                if (pipe[i].correctTool1 == true)
+                {
+                    problemSolved?.Invoke();
+                    gameState[i] = GameState.FinishRepair;
+                }
+            }
+            else if (i == 1 && gameState[i] == GameState.GetTool)
+            {
+                if (pipe[i].correctTool2 == true)
+                {
+                    problemSolved?.Invoke();
+                    gameState[i] = GameState.FinishRepair;
+                }
+            }
+
         }
 
-        if(fish.found == true && gameState == GameState.FindPipe)
+        if(gameState[0] == GameState.FinishRepair && gameState[1] != GameState.FinishRepair)
         {
-            FindFish?.Invoke();
-            gameState = GameState.FightFish;
+            oneOK = true;
         }
-        
-        if(fish.die == true && gameState == GameState.FightFish)
+        else if(gameState[0] != GameState.FinishRepair && gameState[1] == GameState.FinishRepair)
         {
-            gameState = GameState.Win;
-            win?.Invoke();
+            oneOK = true;
         }
 
-        if(pipe.found == true && gameState == GameState.Win)
+        if(gameState[0] == GameState.FinishRepair && gameState[1] == GameState.FinishRepair)
         {
-            BackToPipe?.Invoke();
-            gameState = GameState.GetTool;
-        }
-
-        if(pipe.correctTool == true && gameState == GameState.GetTool)
-        {
-            gameState = GameState.FinishRepair;
-        }
-
-        if(gameState == GameState.FinishRepair)
-        {
-            problemSolved?.Invoke();
-            Debug.Log("End");
+            _endUI.SetActive(true);
+            Time.timeScale = 0f;
         }
     }
 
@@ -104,7 +136,13 @@ public class GameController : MonoBehaviour
         if (oxygenLevel <= 0f)
         {
             oxygenLevel = 0f;
+            die?.Invoke();
         }
+    }
+
+    public void KillNeedO2(float value)
+    {
+        oxygenLevel -= value;
     }
 
     public void IncreaseO2()

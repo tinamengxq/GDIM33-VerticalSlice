@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Data.Common;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,12 +7,14 @@ public class Fish : MonoBehaviour
     [SerializeField] private float interactionDistance;
     [SerializeField] private NavMeshAgent _navMesh;
     [SerializeField] private FishNode _fishNode;
+    [SerializeField] private MeshRenderer meshRenderer;
     public bool found = false;
     public bool die = false;
-    [SerializeField] private GameObject hurtUI;
+    //[SerializeField] private GameObject hurtUI;
     //[SerializeField] private float speed;
     private Vector3 pos = new Vector3();
     private bool newDest = true;
+    private float _time = 1f;
 
     void Start()
     {
@@ -23,6 +22,7 @@ public class Fish : MonoBehaviour
     }
     void Update()
     {
+        pos.y = 1.123f;
         // Check player position
         if(Vector3.Distance(transform.position, _playerTransform.position) < interactionDistance)
         {
@@ -49,25 +49,31 @@ public class Fish : MonoBehaviour
         {
             die = true;
             Debug.Log("Fish die");
-            hurtUI.SetActive(false);
+           // hurtUI.SetActive(false);
         }
 
-        
+        if (meshRenderer.material.color != Color.white)
+        {
+            _time -= Time.deltaTime;
+            if (_time <= 0f)
+            {
+                meshRenderer.material.color = Color.white;
+                _time = 1f;
+            }
+        }
+
 
     }
     private void NewPos()
     {
         float x = Random.Range(-4.77f,3.07f);
-        float y = Random.Range(1.25f,5.14f);
+        float y = 1.123f;
         float z = Random.Range(-1.9f,4.72f);
         pos = new Vector3(x, y, z);
-        Debug.Log(pos + "pos");
-        Debug.Log(transform.position);
     }
 
     private void CheckDest()
     {
-        Debug.Log(Vector3.Distance(pos, transform.position));
         if (Vector3.Distance(pos, transform.position) <= 5f)
         {
             newDest = true;
@@ -80,5 +86,6 @@ public class Fish : MonoBehaviour
     public void kill()
     {
         life -= 1;
+        meshRenderer.material.color = Color.red;
     }
 }
