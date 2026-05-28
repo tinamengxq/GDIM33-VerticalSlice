@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 
 public enum GameState
@@ -40,6 +41,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private float AddO2;
     [SerializeField] private int initialO2;
     [SerializeField] private GameObject _endUI;
+    public bool startGame;
 
     void Awake()
     {
@@ -50,13 +52,20 @@ public class GameController : MonoBehaviour
     {
         gameState[0] = GameState.Start;
         gameState[1] = GameState.Start;
-        oxygenLevel = initialO2;
+        //oxygenLevel = initialO2;
+        InitialOxygen();
+        startGame = false;
+        
     }
 
     public bool oneOK = false;
 
     void Update()
     {
+        if (startGame == false)
+        {
+            InitialOxygen();
+        }
         DecreaseO2();
         OxygenLevel();
 
@@ -134,6 +143,7 @@ public class GameController : MonoBehaviour
         }
     }
 
+
     public void DecreaseO2()
     {
         oxygenLevel -= LoseO2;
@@ -156,6 +166,17 @@ public class GameController : MonoBehaviour
         {
             oxygenLevel = 100f;
         }
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(0);
+    }
+
+    public void InitialOxygen()
+    {
+        oxygenLevel = initialO2;
     }
 }
 

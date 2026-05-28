@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
+    public static UIController Instance {get; private set;}
+
     [SerializeField] private GameObject _pamphletContent;
     [SerializeField] private GameObject _pamphletButton;
     [SerializeField] private PipeNode[] pipeNode;
@@ -21,6 +23,8 @@ public class UIController : MonoBehaviour
     public TMP_Text step2;
     public TMP_Text step3;
     public TMP_Text step4;
+
+    //public bool startGame;
 
     public event Action<int> CheckTool;
     void Start()
@@ -45,6 +49,7 @@ public class UIController : MonoBehaviour
         _dieUI.SetActive(false);
         gameController.die += Die;
         _endUI.SetActive(false);
+        //startGame = false;
     }
 
     public void ShowPamphletContent()
@@ -90,6 +95,7 @@ public class UIController : MonoBehaviour
         if (_backgroundinfo && Input.GetKeyDown(KeyCode.F))
         {
             _backgroundinfo.SetActive(false);
+            gameController.startGame = true;
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
