@@ -85,7 +85,7 @@ public class UIController : MonoBehaviour
         
     }
 
-    private bool handing = true;
+    private bool handing = false;
     private bool handed = false;
 
     void Update()
@@ -105,7 +105,7 @@ public class UIController : MonoBehaviour
         {
             ReturnOutside();
         }
-        if(_dialogueUI && Input.GetKeyDown(KeyCode.F))
+        if(_dialogueUI && Input.GetKeyDown(KeyCode.F) && handing != true)
         {
             //NextSentence();
             _dialogueUI.SetActive(false);
@@ -141,7 +141,7 @@ public class UIController : MonoBehaviour
         
         if (end == true && _dialogueUI)
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.F) && handing != true)
             {
                 _dialogueUI.SetActive(false);
             }
