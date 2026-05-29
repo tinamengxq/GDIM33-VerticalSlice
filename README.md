@@ -86,17 +86,22 @@ This defines when will the custom event be triggered. After coding all of this, 
     - When you go up to gain oxygen, you will find that the timeline effect disappear once your oxygen is greater than 10%.
 
 ## Milestone 3 Devlog
-1. Describe how your ShaderGraph works. You must cite something technical about the shader (like ShaderGraph Nodes used, or concepts learned in class about vertex data or the rendering pipeline) and accurately explain the shader. Attach a screenshot of your ShaderGraph. Please make sure it's also very clear from your explanation where the graders can find this shader in the game to give you credit for it.
-
-2. In a paragraph or less, explain to the grading team what you improved in your gameplay based on feedback from playtesting.
-- restart button
-- increase the size of the UI to show the oxygen level
-- decrease the rate of oxygen losing
-- when telling the initial background story, stop the decrease of the oxygen and stop everything
+1. Because my game takes place in water, my shader graph uses post-processing effect to show the entire scene is under water. I used URP universal renderer and added it to the list of the graphic renderer list. Then I changed my main camera renderering effect into my post-processing effect. I added a full screen pass renderer feature to my post-processing effect asset and attached a new material to the full screen feature. I created a shader graph to build the effect. I used URP sample buffer node with source buffer blitsource. I also created a sample texture 2D to input my own texture (I drew it myself) and screen position node for UV input. I used multiply node to multiply the result of sample texture 2D node and URP sample buffer node. The result contributes to the fragment shader's base color. 
+The effect can be seen every second in the game when the player is playing in the water (as the screen is blue). I will make the activation and deactivation in the future when the player swims up to breathe. 
 
 
-3. In a paragraph or less, explain to the grading team what new content you added since the last Milestone, and its context in the gameplay loop.
 
+2. From the playtest, I received some suggestions (that are "optional", said by the classmates) that I think might modify the main purpose of this game, so I only implemented some useful ones：
+    1. increase the size of the UI on the top right corner.
+        In the play test I increased the total size of the guide as well as the oxygen level to make it clearer for player. 
+    2. decrease the rate of oxygen losing
+        In the playtest, I decreased the rate of losing oxygen to make the timeline effect to show quicker. However, the classmates complained that they have trouble surviving with really low oxygen. So I decreased the rate.
+    3. Decrease oxygen after player finish reading the background story.
+        Along with the quick losing oxygen speed, player die very soon after they finish reading the guide. I changed the oxygen level into that it will only decrease only after player click F to make background guide disappear. 
+    4. Make the fish less annoying to players
+        Some classmates told me that those fishes sometimes annoy them when they want to stay still in front of their target fish. Thus, I decreased the number of NPC fish that isn't related to the gameplay loop. I also decreased speeds of all the fishes in the scene to make it more easier to block the fish.
+
+3. I already completed the basic gameplay loop of two tasks (two pairs of fish and pipe) in milestone 2, so I introduced a background story before the game to explain to the player about the background more thoroughly. In order to make the entire gameplay loop clearer for the players, I added some explanations for the player to know what they need to do after the game starts. I tried to make the story funny, and I also added a summary of what player should do during the game. The background story appears before the water scene. 
 
 
 
