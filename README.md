@@ -89,6 +89,7 @@ This defines when will the custom event be triggered. After coding all of this, 
 1. Because my game takes place in water, my shader graph uses post-processing effect to show the entire scene is under water. I used URP universal renderer and added it to the list of the graphic renderer list. Then I changed my main camera renderering effect into my post-processing effect. I added a full screen pass renderer feature to my post-processing effect asset and attached a new material to the full screen feature. I created a shader graph to build the effect. I used URP sample buffer node with source buffer blitsource. I also created a sample texture 2D to input my own texture (I drew it myself) and screen position node for UV input. I used multiply node to multiply the result of sample texture 2D node and URP sample buffer node. The result contributes to the fragment shader's base color. 
 The effect can be seen every second in the game when the player is playing in the water (as the screen is blue). I will make the activation and deactivation in the future when the player swims up to breathe. 
 
+<img width="1510" height="605" alt="shadergraph" src="https://github.com/user-attachments/assets/9344ffd1-45c0-4286-97f3-885f30290f8e" />
 
 
 2. From the playtest, I received some suggestions (that are "optional", said by the classmates) that I think might modify the main purpose of this game, so I only implemented some useful ones：
