@@ -345,6 +345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerTransform: {fileID: 493834056}
   following: {x: 0, y: 0, z: 0}
+  _camera: {fileID: 330585545}
 --- !u!1 &369790388
 GameObject:
   m_ObjectHideFlags: 0
@@ -2829,7 +2830,7 @@ MonoBehaviour:
   oxygenLevel: 0
   lowOxygen: 10
   oxygenTimeline: {fileID: 1104368409}
-  LoseO2: 0.001
+  LoseO2: 0.0005
   AddO2: 1
   initialO2: 90
   _endUI: {fileID: 1072884332}
@@ -2929,7 +2930,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 832575517}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
   m_Name: 
@@ -5071,6 +5072,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0404813a2793f40cc93dab162a4d76e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraController: {fileID: 330585548}
 --- !u!1001 &1687561052
 PrefabInstance:
   m_ObjectHideFlags: 0

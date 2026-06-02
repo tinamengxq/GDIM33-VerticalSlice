@@ -1,14 +1,19 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class CameraController : MonoBehaviour
 {
+    public static CameraController Instance;
     [SerializeField] private Transform _playerTransform;
     public Vector3 following = new Vector3(0, 1.5f, 0);
+    [SerializeField] private Camera _camera;
+    private UniversalAdditionalCameraData cameraRenderer;
 
     void Start()
     {
         transform.SetParent(_playerTransform);
         transform.localPosition = following;
+        cameraRenderer = _camera.GetUniversalAdditionalCameraData();
     }
     void Update()
     {
@@ -27,5 +32,11 @@ public class CameraController : MonoBehaviour
         //_playerTransform.Rotate(-mouseY,0f,0f, Space.World);
 
         transform.localPosition = following;
+    }
+
+    public void ChangeCamera(int renderer)
+    {
+        cameraRenderer.SetRenderer(renderer);
+        Debug.Log(renderer);
     }
 }
