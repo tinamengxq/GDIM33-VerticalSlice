@@ -15,6 +15,7 @@ public class Fish : MonoBehaviour
     private Vector3 pos = new Vector3();
     private bool newDest = true;
     private float _time = 1f;
+    [SerializeField] private AudioSource hurt;
 
     void Start()
     {
@@ -87,5 +88,6 @@ public class Fish : MonoBehaviour
     {
         life -= 1;
         meshRenderer.material.color = Color.red;
+        hurt.Play();
     }
 }

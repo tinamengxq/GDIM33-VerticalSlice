@@ -104,16 +104,22 @@ The effect can be seen every second in the game when the player is playing in th
 
 3. I already completed the basic gameplay loop of two tasks (two pairs of fish and pipe) in milestone 2, so I introduced a background story before the game to explain to the player about the background more thoroughly. In order to make the entire gameplay loop clearer for the players, I added some explanations for the player to know what they need to do after the game starts. I tried to make the story funny, and I also added a summary of what player should do during the game. The background story appears before the water scene. 
 
-
-
-## Milestone 4 Devlog
-Milestone 4 Devlog goes here.
 ## Final Devlog
 Final Devlog goes here.
 
+1. Briefly describe your core gameplay loop and the content we can find in your game. Then, relate the gameplay and content you implemented back to your original plan for creating a Vertical Slice: how does this gameplay and content illustrate to the player what the full game would be like?
+2. In about a paragraph, describe how your rendering effect is activated from gameplay logic. Either attach a screenshot of the relevant Graph OR cite the relevant C# file(s) so we can find them in your repo. Accurately describe your system with technical terms.
+3. Describe your process for how you break down a large project into specific systems. If you don't have a process that works well for you right now, you must come up with an describe a viable plan.
+Make sure to also answer ALL of these questions in your answer:
+Do you plan on using either the bubble diagram break-downs and/or the task step break-downs we practiced this quarter in your planning process? Why or why not?
+How does the process of breaking down a large project into small steps affect your understanding of the scope of the project?
+How does the plan you're describing relate to your process of creating the Vertical Slice project? You can write about either how things went poorly and how you'd improve your process as a result, or about how things went well that you want to repeat.
 
 ## Open-source assets
 - [Pipe](https://assetstore.unity.com/packages/3d/props/industrial/modular-pipeline-pack-70776)
 - [Fish](https://assetstore.unity.com/packages/3d/characters/animals/fish/low-poly-fish-339618#content)
 - [Wall](https://polyhaven.com/a/stained_pine)
 - [Terrain](https://assetstore.unity.com/packages/3d/environments/landscapes/terrain-sample-asset-pack-145808)
+- [Finish SFX](https://freesound.org/people/jivatma07/sounds/122255/)
+- [Hurt SFX](https://freesound.org/people/MrEchobot/sounds/745185/)
+- [BGM](https://freesound.org/people/plasterbrain/sounds/464918/)

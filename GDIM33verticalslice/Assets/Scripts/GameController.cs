@@ -42,6 +42,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private int initialO2;
     [SerializeField] private GameObject _endUI;
     public bool startGame;
+    [SerializeField] private AudioSource finish;
 
     void Awake()
     {
@@ -102,6 +103,7 @@ public class GameController : MonoBehaviour
                 {
                     problemSolved?.Invoke();
                     gameState[i] = GameState.FinishRepair;
+                    finish.Play();
                 }
             }
             else if (i == 1 && gameState[i] == GameState.GetTool)
@@ -110,6 +112,7 @@ public class GameController : MonoBehaviour
                 {
                     problemSolved?.Invoke();
                     gameState[i] = GameState.FinishRepair;
+                    finish.Play();
                 }
             }
 
