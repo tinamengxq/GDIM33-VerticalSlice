@@ -128,7 +128,7 @@ Final Devlog goes here.
     - Player can't always stay under water because they need oxygen. When player go up to get oxygen, a water surface will appear and the post processing effect will disappear. When player run out of oxygen (the total oxygen is below 10%), I use timeline and UI panel to make the screen darker. 
     - All details in this part in the vertical sliec will be the same for all future levels in the full game. 
 2. In about a paragraph, describe how your rendering effect is activated from gameplay logic. Either attach a screenshot of the relevant Graph OR cite the relevant C# file(s) so we can find them in your repo. Accurately describe your system with technical terms.
-When player go up above water, the water post processing effect will be deactivated. The rendering effect will be activated when player go back into the water. In the slides of W9 I found an example that said I can change the rendering setting of the camera. Thus, I googled how to change the renderer the camera, which results in using GetUniversalAdditionalCameraData() to get the rendering setting of the camera and change the rendering setting based on the rendering list that this setting have access to, which is the renderer lsit in URP-High Fiedlity. I make changes in rendering setting according to the relative position between the camera.position.y and watersurface.position.y. The following code shows how I make changes. In the renderer list in URP-High Fidelity, 0 is the renderer without the post processing effect, and 1 is the renderer with the post processing effect.
+When player go up above water, the water post processing effect will be deactivated. The rendering effect will be activated when player go back into the water. In the slides of W9 I found an example that said I can change the rendering setting of the camera. Thus, I googled how to change the renderer the camera, which results in using GetUniversalAdditionalCameraData() to get the rendering setting of the camera and change the rendering setting based on the rendering list that this setting have access to, which is the renderer lsit in URP-High Fiedlity. I make changes in rendering setting according to the relative position between the camera.position.y and watersurface.position.y in the script CameraController.cs. The following code shows how I make changes. In the renderer list in URP-High Fidelity, 0 is the renderer without the post processing effect, and 1 is the renderer with the post processing effect.
 <img width="357" height="178" alt="Screenshot 2026-06-09 at 19 59 02" src="https://github.com/user-attachments/assets/ca729c16-c3ca-4d1c-b6f5-eea0e3bc3ecb" />
 
 ```
@@ -138,19 +138,19 @@ using UnityEngine.Rendering.Universal;
 
 public class CameraController : MonoBehaviour
 {
-    //...
+    //codes for movement
     [SerializeField] private Camera _camera;
     private UniversalAdditionalCameraData cameraRenderer;
     [SerializeField] private Transform water;
     [SerializeField] private GameObject waterSurface;
     void Start()
     {
-        //...
+        //codes for movement
         cameraRenderer = _camera.GetUniversalAdditionalCameraData();
     }
     void Update()
     {
-        //...
+        //codes for movement
 
         //oxygen
         if (water.position.y > transform.position.y)
@@ -174,11 +174,20 @@ public class CameraController : MonoBehaviour
     }
 }
 ```
-3. Describe your process for how you break down a large project into specific systems. If you don't have a process that works well for you right now, you must come up with an describe a viable plan.
-Make sure to also answer ALL of these questions in your answer:
-Do you plan on using either the bubble diagram break-downs and/or the task step break-downs we practiced this quarter in your planning process? Why or why not?
-How does the process of breaking down a large project into small steps affect your understanding of the scope of the project?
-How does the plan you're describing relate to your process of creating the Vertical Slice project? You can write about either how things went poorly and how you'd improve your process as a result, or about how things went well that you want to repeat.
+3. I have several steps when breaking down a large project:
+    1. write a pitch document draft that includes a list of all the ideas and systems I want to make and use. 
+    2. write some specific explanations on how these tools/systems can be used in my game
+    3. come up with an entire game mechanism that includes all the tools and systems and write a summary paragraph of how this game will be shown to the player.
+    4. Now we have a pitch document that is kinda complicated. Thus, create a bubble diagram and put all the tools and systems and possible scripts and methods in the diagram. 
+        - I believe a bubble graph is the fastest way for me to figure out what methods in each scripts I will be coding and why. I can also help me figure out if I need any event for the game. By separating the bubble diagram into different parts, I can focus on writing scripts part by part. Also, a bubble diagram can help me have an idea about how much effort I shall spend on this large project. 
+    5. Link relations between each bubble.
+        - It is important to put all the possible relations into the bubble graph because it can sometimes help minimize the scope for this large project. I sometimes find some collapse between funcitons when coding without having all the links listed before. Also, these links can help me figure out which gameobject(s) should I attach these codes to and how they can be linked to graphs (possibly).
+        - This is why I always draw very complicated break down graph for my game projects. 
+    6. Figure out if there are complicated systems or tools or not. If yes, for each tool, list a task step break down and make sure to follow it step by step when making the game. 
+        - It was the first time for me to break down new systems step by step so specifically. While I was new to Timeline and kinda new to NavMesh, I think a step-by-step break down is very useful for me to find some directions and keep my brain clear when I was worried. Also, having a list of break down can control my idea and stop me from coming up with new things to add into the game. 
+    7. Figure out if I will be using event or not. If yes, draw a flow chart with several lines to show how the event will work (who call? call who?). For each event, list a list of steps in the order of coding. 
+        - While an event often links codes in way more than 2 scripts, it is important for me to figure out what is exactly happening when an event is called. Writing it done in a flow chart is much better than crtl/cmd + F and/or "go to definition" every time I want to use this event. It can also help me when coding because then I can check if I have attached all the methods in to all the events in all the codes. 
+        - This is a method I figured out when coding for a large project other than this one. In that project, I also created a 3D combat system that uses a lot of events. I was exhausted when finding where did I put the related codes at that time. Thus, I created this method of drawing flow chart. In this large project, I didn't use many events, but I still found that this method helped me a lot. 
 
 ## Open-source assets
 - [Pipe](https://assetstore.unity.com/packages/3d/props/industrial/modular-pipeline-pack-70776)
