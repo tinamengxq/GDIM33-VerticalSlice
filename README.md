@@ -107,8 +107,69 @@ The effect can be seen every second in the game when the player is playing in th
 ## Final Devlog
 Final Devlog goes here.
 
-1. Briefly describe your core gameplay loop and the content we can find in your game. Then, relate the gameplay and content you implemented back to your original plan for creating a Vertical Slice: how does this gameplay and content illustrate to the player what the full game would be like?
+1. Game loop:
+- story
+    - This game tells a story about a prisoner fixing the pipes when they are broken and water come in. Player will be the prisoner. Stories will be shown to the player between each game level in the full game to connect levels. 
+    - In this vertical slice, story is only shown before this game level. The current story is the beginning part. 
+    - The story in this vertical slice can imitate how the story can be presented to the player and how the change between scenes can be arranged. 
+- quest
+    - In every game level, player will be given several quests. They will have to first find the problematic pipe and then find the corresponding tool to fix this pipe. Because there are fishes in the water, fishes eat the tools. Player have to defeat the fishes to get the tool. In the full game, the number of pipes waiting to be fixed will increase as the level increase. Player will be able to get to different rooms to fix different pipes. And there will be more fishes in future levels. The number of tools required to fix one pipe will increase. 
+    - In this vertical slice, I created 2 problematice pipes. One's tool is eaten by the fish in green and white. The other's tool is eaten by the fish in red and white. 
+    - The pamphlet is a panel that shows all the steps that the player has to follow along the entire process of fixing ONE pipe. It will be updated with different guide toward different fishes after the player start to work for another pipe.
+    - The quest in this vertical slice imitates the flow of one quest, which is the basic of future complex designs. The process of find - fight - fix is the same for all quests in the full game as well as the pamphlet. 
+- combat
+    - In the process of fixing a pipe, player has to kill the fish to get the tool inside their stomach. I use raycast to make sure that the player is close to and facing the fish. As long as the raycast shows that the player is facing the fish, the attack of the player will work. Every time the player can attack the fish using keycode E. Every time the fish is hurt, its eyes will turn red and there will be a "Ooh" sound. After the fish say "oh I lose", the player will automatically get the tool. 
+    - The fish also has different status. It is controlled by the graph that only when player approaches the fish, they will stop and rotate themselves to show that they are nervous and scared, which means they are transfered into a new stage. In regular status, navmesh agent is used to control the fishes' movements.
+    - This vertical slice already covers all the details of combat that will appear in the future levels in the full game. I would only make some fish fight back in the full game to make the level harder. 
+- water and oxygen
+    - While the game is located mostly under water, I used a post processing effect to show water using camera renderer setting. I also added some distortion effect of the water to make it more realistic but it is not obvious and hard to find because the distortion is very small. Therefore, I would put a screenshot of my shader graph to show the distortion effect. 
+    - Player can't always stay under water because they need oxygen. When player go up to get oxygen, a water surface will appear and the post processing effect will disappear. When player run out of oxygen (the total oxygen is below 10%), I use timeline and UI panel to make the screen darker. 
+    - All details in this part in the vertical sliec will be the same for all future levels in the full game. 
 2. In about a paragraph, describe how your rendering effect is activated from gameplay logic. Either attach a screenshot of the relevant Graph OR cite the relevant C# file(s) so we can find them in your repo. Accurately describe your system with technical terms.
+When player go up above water, the water post processing effect will be deactivated. The rendering effect will be activated when player go back into the water. In the slides of W9 I found an example that said I can change the rendering setting of the camera. Thus, I googled how to change the renderer the camera, which results in using GetUniversalAdditionalCameraData() to get the rendering setting of the camera and change the rendering setting based on the rendering list that this setting have access to, which is the renderer lsit in URP-High Fiedlity. I make changes in rendering setting according to the relative position between the camera.position.y and watersurface.position.y. The following code shows how I make changes. In the renderer list in URP-High Fidelity, 0 is the renderer without the post processing effect, and 1 is the renderer with the post processing effect. 
+```
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.Rendering.Universal;
+
+public class CameraController : MonoBehaviour
+{
+    //...
+    [SerializeField] private Camera _camera;
+    private UniversalAdditionalCameraData cameraRenderer;
+    [SerializeField] private Transform water;
+    [SerializeField] private GameObject waterSurface;
+    void Start()
+    {
+        //...
+        cameraRenderer = _camera.GetUniversalAdditionalCameraData();
+    }
+    void Update()
+    {
+        //...
+
+        //oxygen
+        if (water.position.y > transform.position.y)
+        {
+            ChangeCamera(1); 
+            Debug.Log("Active water effect");
+            waterSurface.SetActive(false);
+        }
+        else
+        {
+            ChangeCamera(0);
+            Debug.Log("Deactivate water effect");
+            waterSurface.SetActive(true);
+        }
+    }
+
+    public void ChangeCamera(int renderer)
+    {
+        cameraRenderer.SetRenderer(renderer);
+        Debug.Log(renderer);
+    }
+}
+```
 3. Describe your process for how you break down a large project into specific systems. If you don't have a process that works well for you right now, you must come up with an describe a viable plan.
 Make sure to also answer ALL of these questions in your answer:
 Do you plan on using either the bubble diagram break-downs and/or the task step break-downs we practiced this quarter in your planning process? Why or why not?
