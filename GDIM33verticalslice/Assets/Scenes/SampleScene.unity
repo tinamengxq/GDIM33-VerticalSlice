@@ -2961,7 +2961,7 @@ MonoBehaviour:
   oxygenLevel: 0
   lowOxygen: 10
   oxygenTimeline: {fileID: 1104368409}
-  LoseO2: 0.001
+  LoseO2: 0.003
   AddO2: 1
   initialO2: 90
   _endUI: {fileID: 1072884332}
