@@ -178,6 +178,7 @@ public class CameraController : MonoBehaviour
     1. write a pitch document draft that includes a list of all the ideas and systems I want to make and use. 
     2. write some specific explanations on how these tools/systems can be used in my game
     3. come up with an entire game mechanism that includes all the tools and systems and write a summary paragraph of how this game will be shown to the player.
+        - It is just a finished pitch document that describes how I am going to use the tools and systems to achieve what kind of effects. It is important for the bubble graph in the next step because bubble graph can only be built when the producer have a lot ideas in mind. 
     4. Now we have a pitch document that is kinda complicated. Thus, create a bubble diagram and put all the tools and systems and possible scripts and methods in the diagram. 
         - I believe a bubble graph is the fastest way for me to figure out what methods in each scripts I will be coding and why. I can also help me figure out if I need any event for the game. By separating the bubble diagram into different parts, I can focus on writing scripts part by part. Also, a bubble diagram can help me have an idea about how much effort I shall spend on this large project. 
     5. Link relations between each bubble.
